@@ -33,14 +33,16 @@ def processText(text):
 @route('/')
 def index( method="GET"):
 
+    global displayText
+
     if request.query.transformcontent == "transformcontent":
-        swapText.displayText = processText(swapText.displayText)
+        displayText = processText(displayText)
 
     else:
-        swapText.displayText = getNewContent()
+        displayText = getNewContent()
 
-    return template(page, displayText=swapText.displayText)
+    return template(page, displayText=displayText)
 
 if __name__ == "__main__":
-    swapText.displayText = getNewContent()
+    displayText = getNewContent()
     run_app(host='localhost', port=8080, debug=True, reloader=True)
